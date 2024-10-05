@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical ERP - Home</title>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="nav justify-content-center bg-black bg-gradient  navbar-dark py-2 d-flex justify-content-center gap-3">
+        <a class=" btn btn-outline-light   active fw-bold" href="/" aria-current="page">Home </a>
+
+        {% if session['username'] %}
+        <a class=" btn btn-outline-light fw-bold" href="/signout">signout</a>
+        <a class="btn btn-outline-light fw-bold " href="/register">Register Patient</a>
+        <a class="btn btn-outline-light fw-bold" href="/query">Query Patient</a>
+        {% else %}
+        <a class=" btn btn-outline-light   fw-bold" href="/login">login</a>
+        {% endif %}
+        <a class=" btn btn-outline-light   fw-bold" href="/about">About</a>
+
+    </nav>
+
+
+    <div class="container-fluid text-center mb-5 pt-3">
+        <h1 class=" mb-3">Welcome to Medical ERP</h1>
+        <img class="img-fluid" src="static\images\hos.jpg" usemap="#mymap" >
+        <map name="mymap">
+            <area shape="circle" coords="77, 136, 50"
+                alt="doctors" href="/doctors">
+                <area shape="circle" coords="310, 136, 50"
+                alt="doctors" href="/pharmacy">
+                <area shape="circle" coords="190, 65, 50"
+                alt="doctors" href="/staff">
+                <area shape="circle" coords="190, 340, 50"
+                alt="doctors" href="/equipments">
+                <area shape="circle" coords="77, 270, 50"
+                alt="doctors" href="/patients">
+                <area shape="circle" coords="310, 270, 50"
+                alt="doctors" href="/accounts">
+        </map>
+    </div>
+    <div class="h3 text-center">A simple and effective ERP system for managing hospital data</div>
+    <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script>
+      
+    </script>
+</body>
+
+</html>

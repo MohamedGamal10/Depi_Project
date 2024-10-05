@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="nav justify-content-center bg-black bg-gradient  navbar-dark py-2 d-flex justify-content-center gap-3">
+        <a class=" btn btn-outline-light    fw-bold" href="/" aria-current="page">Home </a>
+        <a class=" btn btn-outline-light   active fw-bold" href="/login">login</a>
+        <a class=" btn btn-outline-light   fw-bold" href="/about">About</a>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-center mt-5">   
+            <div class="col-12 col-md-6 border rounded-3 pt-3">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-danger bg-gradient alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <ul class="list-unstyled">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+        
+                {% endif %}
+                {% endwith %}
+                <div class="h2 ">Login to ERP:</div>
+                <form method="POST" action="/login" >
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control mb-3" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    <div class="d-flex justify-content-end my-3">
+                        <button type="submit" class="btn btn-light">Login</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Patient</title>
+  <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+</head>
+
+<body data-bs-theme="dark">
+  <nav class="nav justify-content-center bg-black bg-gradient  navbar-dark py-2 d-flex justify-content-center gap-3">
+    <a class=" btn btn-outline-light fw-bold" href="/" aria-current="page">Home </a>
+    <a class=" btn btn-outline-light fw-bold" href="/signout">signout</a>
+    <a class="btn btn-outline-light fw-bold active" href="/register">Register Patient</a>
+    <a class="btn btn-outline-light fw-bold" href="/query">Query Patient</a>
+    <a class=" btn btn-outline-light fw-bold" href="/about">About</a>
+
+  </nav>
+  <div class="container-fluid">
+    <div class="row justify-content-center pt-5">
+      <div class="col-12 col-md-4  border rounded-3">
+        <h1 class="text-center">Register New Patient</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-info bg-gradient alert-dismissible fade show" role="alert">
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <ul class="list-unstyled">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% endif %}
+        {% endwith %}
+
+
+        <form method="POST">
+          <label for="name">Patient Name:</label>
+          <input class="form-control" type="text" id="name" name="name" required><br>
+
+          <label for="age">Patient Age:</label>
+          <input class="form-control" type="text" id="age" name="age" required><br>
+
+          <label for="entry_date">Entry Date:</label>
+          <input class="form-control" type="date" id="entry_date" name="entry_date" required><br>
+
+          <label for="blood_class">Blood Class:</label>
+          <input class="form-control" type="text" id="blood_class" name="blood_class" required><br>
+
+          <label for="permanent_diseases">Permanent Diseases:</label>
+          <textarea class="form-control" id="permanent_diseases" name="permanent_diseases" rows="4"
+            required></textarea><br>
+          <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-light w-50" type="submit">Register</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+
+</html>

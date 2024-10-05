@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Medical ERP</title>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="nav justify-content-center bg-black bg-gradient  navbar-dark py-2 d-flex justify-content-center gap-3">
+        <a class=" btn btn-outline-light    fw-bold" href="/" aria-current="page">Home </a>
+        
+        {% if session['username'] %}
+        <a class=" btn btn-outline-light fw-bold" href="/signout">signout</a>
+        <a class="btn btn-outline-light fw-bold " href="/register">Register Patient</a>
+        <a class="btn btn-outline-light fw-bold" href="/query">Query Patient</a>
+        {% else %}
+        <a class=" btn btn-outline-light   fw-bold" href="/login">login</a>
+        {% endif %}
+        <a class=" btn btn-outline-light active  fw-bold" href="/about">About</a>
+    </nav>
+
+    <div class="container text-center ">
+        <div class="display-3 mb-3">About Medical ERP</div>
+        <div class="lead">Medical ERP is designed to simplify the process of managing hospital data, ensuring smooth operations and
+            seamless communication between departments.</div>
+    </div>
+
+    <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+
+</html>

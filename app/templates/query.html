@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Patient</title>
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="nav justify-content-center bg-black bg-gradient  navbar-dark py-2 d-flex justify-content-center gap-3">
+        <a class=" btn btn-outline-light fw-bold" href="/" aria-current="page">Home </a>
+        <a class=" btn btn-outline-light fw-bold" href="/signout">signout</a>
+        <a class="btn btn-outline-light fw-bold " href="/register">Register Patient</a>
+        <a class="btn btn-outline-light fw-bold active" href="/query">Query Patient</a>
+        <a class=" btn btn-outline-light fw-bold" href="/about">About</a>
+
+
+    </nav>
+
+    <div class="container-fluid ">
+        <div class="row justify-content-center pt-5 gap-5">
+            <div class="col-12 col-md-8 border rounded-3 p-3">
+                <h1 class="text-center">Query Patient Information</h1>
+                <form method="POST">
+                    <label for="search_param">Enter Patient ID or Name:</label>
+                    <input class="form-control" type="text" id="search_param" name="search_param" required><br>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-light">Search</button>
+
+                    </div>
+                </form>
+            </div>
+            {% if patient_data %}
+            <div class="col-12 col-md-8 border rounded-3 p-3">
+
+                <h2>Search Results:</h2>
+                <ul>
+                    {% for patient in patient_data %}
+                    <li>ID: {{ patient[0] }}, Patient Name: {{ patient[1] }},Patient AGE: {{ patient[5] }}, Entry Date:
+                        {{
+                        patient[4] }}, Blood Class: {{ patient[6] }}, Permanent Diseases: {{ patient[7] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>
