@@ -20,7 +20,7 @@ pipeline {
                     sh '''
                         cd app
                         python3 -m venv venv  
-                        source venv/bin/activate 
+                        . venv/bin/activate 
                         pip install --upgrade pip 
                     '''
                 }
@@ -33,7 +33,7 @@ pipeline {
                 script {
                     def testResult = sh(script: '''
                         cd pp
-                        source venv/bin/activate  
+                        . venv/bin/activate  
                         pip install -r requirements.txt
                         pytest -v test.py  # Run tests
                     ''', returnStatus: true)
