@@ -8,17 +8,18 @@ pipeline {
         stage('Pull Repository') {
             steps {
                 echo 'Pulling the repository'
-                 sh '''
+                sh '''
                     git clone https://github.com/MohamedGamal10/Depi_Project.git
-                    '''
+                '''
             }
         }
 
         stage('Run Unit Tests') {
             steps {
                 echo 'Running unit tests'
-                def testResult = sh(script: '''
-                        cd Depi_Project/app
+                script {
+                    def testResult = sh(script: '''
+                        cd app
                         pip install -r requirements.txt
                         pytest -v test.py
                     ''', returnStatus: true)
@@ -26,6 +27,7 @@ pipeline {
                     if (testResult != 0) {
                         error("Unit tests failed")
                     }
+                }
             }
         }
 
@@ -33,16 +35,15 @@ pipeline {
             steps {
                 echo 'Building Docker image and pushing to Docker Hub'
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh '''
+                    sh '''
                         cd app
                         docker build -t ${USERNAME}/app:${BUILD_NUMBER} .
                         echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin
                         docker push ${USERNAME}/app:${BUILD_NUMBER}
-                        '''   
-                    }
+                    '''   
+                }
             }
         }
-
 
         stage('Deploy to GKE') {
             steps {
