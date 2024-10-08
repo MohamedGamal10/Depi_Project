@@ -17,6 +17,15 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 echo 'Running unit tests'
+                def testResult = sh(script: '''
+                        cd Depi_Project/app
+                        pip install -r requirements.txt
+                        pytest -v test.py
+                    ''', returnStatus: true)
+
+                    if (testResult != 0) {
+                        error("Unit tests failed")
+                    }
             }
         }
 
@@ -25,10 +34,10 @@ pipeline {
                 echo 'Building Docker image and pushing to Docker Hub'
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh '''
-                        cd Depi_Project/app
+                        cd app
                         docker build -t ${USERNAME}/app:${BUILD_NUMBER} .
                         echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin
-                        docker push ${USERNAME}/my-react-app:${BUILD_NUMBER}
+                        docker push ${USERNAME}/app:${BUILD_NUMBER}
                         '''   
                     }
             }
@@ -46,6 +55,9 @@ pipeline {
     post {
         always {
             cleanWs()
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
