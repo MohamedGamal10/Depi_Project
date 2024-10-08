@@ -8,9 +8,7 @@ pipeline {
         stage('Pull Repository') {
             steps {
                 echo 'Pulling the repository'
-                sh '''
-                    git clone https://github.com/MohamedGamal10/Depi_Project.git
-                '''
+                sh 'git clone https://github.com/MohamedGamal10/Depi_Project.git'
             }
         }
 
@@ -18,11 +16,12 @@ pipeline {
             steps {
                 echo 'Setting up Python virtual environment'
                 script {
+
                     sh '''
                         cd app
                         python3 -m venv venv  
-                        source venv/bin/activate  
-                        pip install --upgrade pip
+                        source venv/bin/activate 
+                        pip install --upgrade pip 
                     '''
                 }
             }
@@ -33,9 +32,10 @@ pipeline {
                 echo 'Running unit tests'
                 script {
                     def testResult = sh(script: '''
-                        cd app
+                        cd pp
+                        source venv/bin/activate  
                         pip install -r requirements.txt
-                        pytest -v test.py
+                        pytest -v test.py  # Run tests
                     ''', returnStatus: true)
 
                     if (testResult != 0) {
@@ -50,7 +50,7 @@ pipeline {
                 echo 'Building Docker image and pushing to Docker Hub'
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh '''
-                        cd app
+                        cd Depi_Project/app
                         docker build -t ${USERNAME}/app:${BUILD_NUMBER} .
                         echo "${PASSWORD}" | docker login -u "${USERNAME}" --password-stdin
                         docker push ${USERNAME}/app:${BUILD_NUMBER}
@@ -62,7 +62,7 @@ pipeline {
         stage('Deploy to GKE') {
             steps {
                 echo 'Deploying to Google Kubernetes Engine'
-
+                
             }
         }
     }
