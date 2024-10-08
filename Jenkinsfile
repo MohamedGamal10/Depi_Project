@@ -14,6 +14,20 @@ pipeline {
             }
         }
 
+        stage('Set Up Python Environment') {
+            steps {
+                echo 'Setting up Python virtual environment'
+                script {
+                    sh '''
+                        cd app
+                        python3 -m venv venv  
+                        source venv/bin/activate  
+                        pip install --upgrade pip
+                    '''
+                }
+            }
+        }
+
         stage('Run Unit Tests') {
             steps {
                 echo 'Running unit tests'
