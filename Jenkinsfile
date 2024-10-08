@@ -32,7 +32,7 @@ pipeline {
                 echo 'Running unit tests'
                 script {
                     def testResult = sh(script: '''
-                        cd pp
+                        cd app
                         . venv/bin/activate  
                         pip install -r requirements.txt
                         pytest -v test.py  # Run tests
