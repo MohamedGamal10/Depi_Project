@@ -73,9 +73,11 @@ pipeline {
         }
         success {
             echo 'Pipeline succeeded!'
+            slackSend(channel: '#depidevopsproject', color: 'good', message: "Build SUCCESSFUL: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
         }
         failure {
             echo 'Pipeline failed!'
+             slackSend(channel: '#depidevopsproject', color: 'danger', message: "Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
         }
     }
 }
