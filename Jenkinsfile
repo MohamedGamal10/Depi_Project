@@ -68,7 +68,7 @@ pipeline {
                         sh """
                         gcloud auth activate-service-account --key-file=${GCLOUD_KEY}
                         gcloud config set project ${PROJECT_ID}
-                        gcloud compute instances
+                        gcloud compute instances list
                         """
                     }
                 }
