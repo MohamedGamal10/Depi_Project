@@ -5,3 +5,5 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
 kubectl get services
+kubectl get deployment app -o=jsonpath='{.spec.template.spec.containers[0].image}'
+
