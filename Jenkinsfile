@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "mohamedgamal10/app:$BUILD_NUMBER"
+        PROJECT_ID = "core-avenue-438213-r8"
     }
 
     stages {
