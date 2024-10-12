@@ -68,7 +68,12 @@ pipeline {
                         sh """
                         gcloud auth activate-service-account --key-file=${GCLOUD_KEY}
                         gcloud config set project ${PROJECT_ID}
-                        gcloud compute instances list
+                        
+                        #Kubernates commands
+                        gcloud container clusters get-credentials <CLUSTER_NAME> --zone <ZONE>
+                        kubectl cluster-info
+                        kubectl set image deployment/app app="mohamedgamal10/app:$BUILD_NUMBER"
+                        kubectl rollout status deployment/app
                         """
                     }
                 }

@@ -1,0 +1,7 @@
+# Apply the deployment
+kubectl apply -f deployment.yaml
+
+# Apply the service
+kubectl apply -f service.yaml
+
+kubectl get services
