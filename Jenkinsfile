@@ -62,6 +62,20 @@ pipeline {
         stage('Deploy to GKE') {
             steps {
                 echo 'Deploying to Google Kubernetes Engine'
+                script {
+                    withCredentials([file(credentialsId: 'gcloud-key', variable: 'GCLOUD_KEY')]) {
+                        sh """
+                        # Authenticate with Google Cloud
+                        gcloud auth activate-service-account --key-file=${GCLOUD_KEY}
+                        gcloud config set project ${PROJECT_ID}
+                        gcloud compute instances
+                        # gcloud container clusters get-credentials ${GKE_CLUSTER} --zone ${GKE_ZONE}
+
+                        # Deploy the new image to GKE
+                        # kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${GCR_IMAGE}:${env.BUILD_NUMBER}
+                        """
+                    }
+                }
                 
             }
         }
