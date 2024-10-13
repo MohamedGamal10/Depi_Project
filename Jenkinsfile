@@ -68,7 +68,6 @@ pipeline {
                         sh """
                         gcloud auth activate-service-account --key-file=${GCLOUD_KEY}
                         gcloud config set project ${PROJECT_ID}
-                        gcloud components install gke-gcloud-auth-plugin
                         export USE_GKE_GCLOUD_AUTH_PLUGIN=True
                         gcloud container clusters get-credentials depiproject --zone us-central1-c
                         kubectl cluster-info
