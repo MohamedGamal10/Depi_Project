@@ -6,7 +6,8 @@ kubectl apply -f service.yaml
 
 #Check the status of the deployment
 kubectl get services
-kubectl get deployment app -o=jsonpath='{.spec.template.spec.containers[0].image}'
+kubectl get pods
+kubectl describe pod <pod-name> 
 
 #Delete the deployment
 kubectl delete deployment app-deployment
@@ -15,4 +16,4 @@ kubectl delete deployment app-deployment
 kubectl delete service app-service
 
 #Delete cluster
-gcloud container clusters delete <CLUSTER_NAME> --zone <ZONE>
+gcloud container clusters delete depiproject --zone us-central1-c
