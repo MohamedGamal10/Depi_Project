@@ -71,7 +71,7 @@ pipeline {
                         export USE_GKE_GCLOUD_AUTH_PLUGIN=True
                         gcloud container clusters get-credentials depiproject --zone us-central1-c
                         kubectl cluster-info
-                        kubectl set image deployment/app-deployment app="mohamedgamal10/app:$BUILD_NUMBER"
+                        kubectl set image deployment/app-deployment my-app-container="mohamedgamal10/app:$BUILD_NUMBER"
                         kubectl rollout status deployment/app-deployment
                         """
                     }
