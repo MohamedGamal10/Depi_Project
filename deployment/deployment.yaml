@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-app-container
-        image: mohamedgamal10/app:18
+        image: mohamedgamal10/app:4
         ports:
         - containerPort: 5000
         env:
